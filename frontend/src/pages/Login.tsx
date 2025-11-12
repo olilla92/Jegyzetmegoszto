@@ -2,8 +2,8 @@ import { useState } from 'react';
 import type { User } from '../types/User.ts';
 import apiClient from '../api/apiClient.ts';
 import { useNavigate } from 'react-router-dom';
-import '../App.css';
-import {Form, Button, Container} from "react-bootstrap"
+import '../LoginRegister.css';
+import { Form, Button } from 'react-bootstrap';
 const Login = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -24,34 +24,40 @@ const Login = () => {
 
     return (
         <>
-            <Container className='formContainer'>
-                <Form className="formLogin">
-                    <Form.Group className="formPoint" controlId="loginUname">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter username here"
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </Form.Group>
+            <Form className="formLogin">
+                <Form.Group className="formPoint" controlId="loginUname">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control
+                        className="FormInput"
+                        type="text"
+                        placeholder="Enter username here"
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </Form.Group>
 
-                    <Form.Group className="formPoint" controlId="loginPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Enter password here"
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </Form.Group>
+                <Form.Group className="formPoint" controlId="loginPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                        className="FormInput"
+                        type="password"
+                        placeholder="Enter password here"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </Form.Group>
 
-                    <Form.Group className="formPoint" controlId="loginButtons">
-                        <Button onClick={Logging} onDoubleClick={() => logging('/me')}>
-                            Login
-                        </Button>
-                        <Button onClick={() => vissza('/')}>Back</Button>
-                    </Form.Group>
-                </Form>
-            </Container>
+                <Form.Group className="formButtons">
+                    <Button
+                        className="loginButtons"
+                        onClick={Logging}
+                        onDoubleClick={() => logging('/me')}
+                    >
+                        Login
+                    </Button>
+                    <Button className="loginButtons" onClick={() => vissza('/')}>
+                        Back
+                    </Button>
+                </Form.Group>
+            </Form>
         </>
     );
 };

@@ -1,5 +1,7 @@
 /*#root -> a mappa gyökere, az index.html fájl beállításai*/
-
+body{
+  background-color: #f8fff9;
+}
 /*Kártyák*/
 .notecard{
   display: flex;
@@ -50,24 +52,4 @@
 }
 @media (max-width: 500px){
   
-}
-
-/*Login*/
-.formContainer{
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-}
-.formLogin{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black; 
-}
-.formPoint{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 15px;
 }

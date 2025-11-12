@@ -1,0 +1,35 @@
+/*Login*/
+body{
+    display: flex;
+    justify-content: center;
+    
+}
+.formLogin{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #183a1d;
+    border-radius: 20px;
+    
+}
+.formPoint{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+}
+.formPoint, .formButtons{
+    margin: auto;
+}
+.loginButtons{
+    width: 100px;
+    margin: 10px;
+    background-color: #f6c453;
+    color: #183a1d;
+    border: 1px solid #183a1d;
+}
+.FormInput{
+    border-radius: 5px;
+    text-indent: 5px;
+}
