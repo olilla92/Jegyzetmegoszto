@@ -1,11 +1,10 @@
 /*#root -> a mappa gyökere, az index.html fájl beállításai*/
-#root{
-  margin: auto;
-}
 
 /*Kártyák*/
-.card{
+.notecard{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 .jegyzet{
@@ -15,29 +14,60 @@
 }
 .adatok{
   width: 300px;
-  height: 400px;
+  height: 300px;
   flex-direction: column; /*egymás alatt*/
-  align-items: center;
+  justify-content: center;
   background-color: #f6c453;
   border: 1px solid #183a1d;
-  margin: 10px 0 10px 0;
   border-radius: 20px;
 }
 
 /*Nav*/
 .nav{
   display: flex;
+  flex-wrap: wrap;
   background-color: #183a1d;
   width: 100vw;
-  height: 100px;
+  height: 50px;
+  top: 0;
+  position: fixed;
+  align-items: center;
 }
-.links{
+.navitems{
   margin: 10px;
-  
 }
 .linktext{
   color:#f6c453
 }
 .linktext:hover{
   color: #af8c3c;
+}
+.searchbar{
+  border-radius: 10px;
+  text-indent: 5px;
+  background-color: #f6c453;
+  color: #183a1d; 
+}
+@media (max-width: 500px){
+  
+}
+
+/*Login*/
+.formContainer{
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+}
+.formLogin{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black; 
+}
+.formPoint{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
 }
