@@ -9,11 +9,6 @@ router.get("/", auth, (req, res) => {
   const users = Users.getUsers();
   res.status(200).json(users);
 });
-// router.get("/:id", auth, (req, res) => {
-//   const user = Users.getUserById(+req.params.id);
-//   if (!user) return res.status(404).json({ message: "User not found!" });
-//   res.status(200).json(user);
-// });
 
 router.get("/me", auth, (req, res) => {
   const user = Users.getUserById(+req.userId);

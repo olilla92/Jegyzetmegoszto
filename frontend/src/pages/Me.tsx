@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { User } from "./types/User";
-import apiClient from "./api/apiClient";
+import type { User } from "../types/User";
+import apiClient from "../api/apiClient";
 import { useParams } from "react-router-dom";
 import "./App.css";
 
