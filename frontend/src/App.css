@@ -1,0 +1,54 @@
+/*#root -> a mappa gyökere, az index.html fájl beállításai*/
+.navbar{
+  display: flex;
+  list-style-type: none;
+  width: 100vw;
+  height: 100px;
+  background-color: #183a1d;
+  margin-bottom: 100px;
+}
+
+
+.jegyzetek{
+  width: 300px;
+  margin: auto;
+}
+.jegyzet{
+  height: 50px;
+  padding: 10px;
+  text-align: center;
+}
+.adatok{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f6c453;
+  border: 1px solid #183a1d;
+  margin: 10px 0 10px 0;
+  border-radius: 20px;
+}
+.NavLink{
+  display: flex;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.linkek{
+  color: #f6c453;
+  width: 100px;
+  height: 30px;
+}
+.linkek:hover{
+  color: #997b34
+}
+
+h2{
+  margin: 10px;
+}
+button{
+  background-color: #183a1d;
+  color: #f6c453;
+  margin: 10px;
+}
+
+
