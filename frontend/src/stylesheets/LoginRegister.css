@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
 }
-.formLogin {
+.formLogin, .formReg {
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -19,14 +19,18 @@ body {
     flex-direction: column;
     align-items: center;
     font-size: 30px;
+    margin-top: 20px;
 }
-.formPoint,
 .formButtons {
     margin: auto;
+    display: flex;
+    flex-direction: row;
 }
-.loginButtons {
+.loginButtons, .regButton {
     width: 100px;
     margin: 10px;
+    display: flex;
+    justify-content: center;
     background-color: #f8fff9;
     color: #183a1d;
     border: 1px solid #183a1d;
@@ -40,4 +44,10 @@ body {
     color: #183a1d;
     box-shadow: 5px 5px #0b1b0e;
     
+}
+
+/*Register*/
+h1{
+    text-align: center;
+    font-size: 45px;
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { Note } from './types/Note.ts';
 import apiClient from './api/apiClient.ts';
-import './App.css';
+import './stylesheets/App.css';
 import { useNavigate } from 'react-router-dom';
 import { Card, Row, Col, Nav, Form } from 'react-bootstrap';
 
@@ -21,27 +21,19 @@ function App() {
             <Nav className="nav">
                 <Nav.Item className="navitems">
                     <Nav.Link className="linktext" href="/">
-                        Főoldal
+                        Home
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="navitems">
                     <Nav.Link className="linktext" onClick={() => belep('/login')}>
-                        Belépés
+                        Login
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="navitems">
                     <Nav.Link className="linktext" onClick={() => reg('/register')}>
-                        Regisztráció
+                        Registration
                     </Nav.Link>
                 </Nav.Item>
-                <Form className="navitems">
-                    <Form.Control
-                        type="search"
-                        placeholder="Search"
-                        className="searchbar"
-                        aria-label="Search"
-                    ></Form.Control>
-                </Form>
             </Nav>
 
             <Row xs={1} md={2} lg={4} className="container">

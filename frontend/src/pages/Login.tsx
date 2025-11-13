@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import apiClient from '../api/apiClient.ts';
 import { useNavigate } from 'react-router-dom';
-import '../LoginRegister.css';
-import '../App.css';
+import '../stylesheets/LoginRegister.css';
+
 import { Form, Button, Nav } from 'react-bootstrap';
 const Login = () => {
     const [username, setUsername] = useState<string>('');
@@ -29,29 +29,22 @@ const Login = () => {
             <Nav className="nav">
                 <Nav.Item className="navitems">
                     <Nav.Link className="linktext" href="/">
-                        Főoldal
+                        Home
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="navitems">
                     <Nav.Link className="linktext" onClick={() => belep('/login')}>
-                        Belépés
+                        Login
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="navitems">
                     <Nav.Link className="linktext" onClick={() => reg('/register')}>
-                        Regisztráció
+                        Registration
                     </Nav.Link>
                 </Nav.Item>
-                <Form className="navitems">
-                    <Form.Control
-                        type="search"
-                        placeholder="Search"
-                        className="searchbar"
-                        aria-label="Search"
-                    ></Form.Control>
-                </Form>
             </Nav>
 
+            <h1>Login</h1>
             <Form className="formLogin" onSubmit={handleLogin}>
                 <Form.Group className="formPoint" controlId="loginUname">
                     <Form.Label>Username</Form.Label>

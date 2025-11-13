@@ -1,0 +1,10 @@
+.title,
+.title:hover {
+    margin-left: 25px;
+    font-size: 25px;
+    color: #f6c453;
+}
+.navButton {
+    margin-left: auto;
+    margin-right: 25px;
+}

@@ -14,7 +14,7 @@ router.get('/', auth, (req, res) => {
 router.get('/me', auth, (req, res) => {
     const user = Users.getUserById(+req.userId);
     if (!user) return res.status(404).json({ message: 'User not found!' });
-    res.json({id: user.id, username: user.username});
+    res.json({ id: user.id, username: user.username });
 });
 
 router.post('/register', (req, res) => {
@@ -24,7 +24,12 @@ router.post('/register', (req, res) => {
     const hashedPassword = bcrypt.hashSync(password, salt);
     const saved = Users.saveUser(username, hashedPassword);
     const user = Users.getUserById(saved.lastInsertRowid);
-    res.status(201).json(user);
+    const token = jwt.sign(
+        { id: user.id, username: user.username },
+        process.env.JWT_SECRET || 'secret',
+        { expiresIn: '1h' },
+    );
+    res.status(201).json({ token, user });
 });
 router.put('/:id', auth, (req, res) => {
     const id = +req.params.id;
