@@ -59,11 +59,11 @@ const Me = () => {
                         </Menu>
                     </Sidebar>
                     <Container className="container">
-                        <Row md={1} lg={3}>
+                        <Row>
                             {myNotes
                                 .filter((n) => n.userId == me.id)
                                 .map((n) => (
-                                    <Col md={3} lg={2} xl={1}>
+                                    <Col>
                                         <Card
                                             className="notecard"
                                             onClick={() => navigate('/edit-note/:id')}

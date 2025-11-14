@@ -3,19 +3,13 @@ body{
   background-color: #f8fff9;
 }
 /*Kártyák*/
-.notecard{
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #f6c453;
-  border: 1px solid #183a1d;
-  border-radius: 20px;
+.cardContainer{
+  height: 100vh;
 }
-.jegyzet{
-  margin: 10px;
-  text-align: center;
+.cardsOfnotes{
+  display: flex;
   justify-content: center;
 }
-
 /*Nav*/
 .nav{
   display: flex;
