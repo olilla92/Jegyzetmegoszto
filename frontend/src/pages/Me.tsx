@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import type { User } from '../types/User';
 import apiClient from '../api/apiClient';
 import { useNavigate } from 'react-router-dom';
-import { Nav, Button } from 'react-bootstrap';
 import '../stylesheets/Me.css';
+import {Nav, NavItem} from "react-bootstrap"
+import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 
 const Me = () => {
     const [me, setMe] = useState<User>();
     const navigate = useNavigate();
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -19,7 +21,6 @@ const Me = () => {
             .get('/users/me', { headers: { Authorization: `Bearer ${token}` } })
             .then((res) => setMe(res.data))
             .catch(() => navigate('/login'));
-
     }, []);
 
     if (!me)
@@ -33,24 +34,19 @@ const Me = () => {
         <>
             {me ? (
                 <>
-                    <div>
-                        <Nav className="nav">
-                            <Nav.Item>
-                                <Nav.Link disabled className="title">
-                                    Welcome {me?.username}
-                                </Nav.Link>
-                            </Nav.Item>
-                            <Button
-                                className="navButton"
-                                onClick={() => {
-                                    localStorage.removeItem('token');
-                                    navigate('/');
-                                }}
-                            >
-                                Logout
-                            </Button>
-                        </Nav>
-                    </div>
+                    <Nav className='HeaderNav'>
+                        <NavItem className='HeaderNavItem'>
+                            <div>Welcome {me?.username}!</div>
+                        </NavItem>
+                    </Nav>
+
+                    <Sidebar className="sidebarNav">
+                        <Menu className='sidebarMenu'>
+                            <MenuItem>My Notes</MenuItem>
+                            <MenuItem>New Note</MenuItem>
+                            <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
+                        </Menu>
+                    </Sidebar>
                 </>
             ) : (
                 <h1>Nincs ilyen felhasználó!</h1>

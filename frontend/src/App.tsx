@@ -3,7 +3,7 @@ import type { Note } from './types/Note.ts';
 import apiClient from './api/apiClient.ts';
 import './stylesheets/App.css';
 import { useNavigate } from 'react-router-dom';
-import { Card, Row, Col, Nav, Form } from 'react-bootstrap';
+import { Card, Row, Col, Nav } from 'react-bootstrap';
 
 function App() {
     const [notes, setNotes] = useState<Array<Note>>([]);
