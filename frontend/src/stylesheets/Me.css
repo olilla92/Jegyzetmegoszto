@@ -18,3 +18,8 @@
     color: white;
     font-size: 40px;
 }
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}

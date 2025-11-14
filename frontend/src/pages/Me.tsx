@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
-import type { User } from '../types/User';
+import type { User } from '../types/User.ts';
+import type { Note } from '../types/Note.ts';
 import apiClient from '../api/apiClient';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Me.css';
-import {Nav, NavItem} from "react-bootstrap"
+import { Nav, NavItem, Row, Col, Card } from 'react-bootstrap';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 
 const Me = () => {
     const [me, setMe] = useState<User>();
+    const [myNotes, setMyNotes] = useState<Array<Note>>([]);
     const navigate = useNavigate();
-
+    useEffect(() => {});
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -21,6 +23,10 @@ const Me = () => {
             .get('/users/me', { headers: { Authorization: `Bearer ${token}` } })
             .then((res) => setMe(res.data))
             .catch(() => navigate('/login'));
+        apiClient
+            .get('/notes')
+            .then((response) => setMyNotes(response.data))
+            .catch((result) => alert(result));
     }, []);
 
     if (!me)
@@ -29,24 +35,50 @@ const Me = () => {
                 <h1>Loading...</h1>
             </>
         );
+    if (!myNotes)
+        return (
+            <>
+                <p>Még nincsenek jegyzeteid!</p>
+            </>
+        );
 
     return (
         <>
             {me ? (
                 <>
-                    <Nav className='HeaderNav'>
-                        <NavItem className='HeaderNavItem'>
+                    <Nav className="HeaderNav">
+                        <NavItem className="HeaderNavItem">
                             <div>Welcome {me?.username}!</div>
                         </NavItem>
                     </Nav>
 
                     <Sidebar className="sidebarNav">
-                        <Menu className='sidebarMenu'>
+                        <Menu className="sidebarMenu">
                             <MenuItem>My Notes</MenuItem>
                             <MenuItem>New Note</MenuItem>
                             <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                         </Menu>
                     </Sidebar>
+
+                    <Row md={1} lg={3} className='container'>
+                        {myNotes
+                            .filter((n) => n.userId == me.id)
+                            .map((n) => (
+                                <Col>
+                                    <Card className="notecard">
+                                        <div className="adatok">
+                                            <Card.Title>
+                                                <h2 className="jegyzet">{n.title}</h2>
+                                            </Card.Title>
+                                            <Card.Body>
+                                                <p className="jegyzet">{n.content}</p>
+                                                <p className='jegyzet'>{n.isPublic}</p>
+                                            </Card.Body>
+                                        </div>
+                                    </Card>
+                                </Col>
+                            ))}
+                    </Row>
                 </>
             ) : (
                 <h1>Nincs ilyen felhasználó!</h1>

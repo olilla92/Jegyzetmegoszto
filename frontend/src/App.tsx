@@ -16,6 +16,7 @@ function App() {
             .then((response) => setNotes(response.data))
             .catch((result) => alert(result));
     }, []);
+
     return (
         <>
             <Nav className="nav">
@@ -36,23 +37,25 @@ function App() {
                 </Nav.Item>
             </Nav>
 
+            
             <Row xs={1} md={2} lg={4} className="container">
-                {Array.from({ length: 1 }).map((_, idx) => (
-                    <Col key={idx}>
-                        <Card className="notecard">
-                            {notes.map((p) => (
+                {notes
+                    .filter((p) => p.isPublic == 'true')
+                    .map((p) => (
+                        <Col>
+                            <Card className="notecard">
                                 <div className="adatok">
                                     <Card.Title>
                                         <h2 className="jegyzet">{p.title}</h2>
                                     </Card.Title>
                                     <Card.Body>
                                         <p className="jegyzet">{p.content}</p>
+                                        <p className="jegyzet">{p.isPublic}</p>
                                     </Card.Body>
                                 </div>
-                            ))}
-                        </Card>
-                    </Col>
-                ))}
+                            </Card>
+                        </Col>
+                    ))}
             </Row>
         </>
     );
