@@ -38,9 +38,9 @@ function App() {
             </Nav>
 
             
-            <Row xs={1} md={2} lg={4} className="container">
+            <Row xs={1} md={2} lg={4}>
                 {notes
-                    .filter((p) => p.isPublic == 'true')
+                    .filter((p) => String(p.isPublic) == 'true')
                     .map((p) => (
                         <Col>
                             <Card className="notecard">

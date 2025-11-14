@@ -3,31 +3,17 @@ body{
   background-color: #f8fff9;
 }
 /*Kártyák*/
-.container{
-  display: flex;
-  gap: 30px;
-  width: 700px;
-  justify-content: center;
-}
 .notecard{
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-.jegyzet{
-  height: 50px;
-  padding: 10px;
-  text-align: center;
-}
-.adatok{
-  width: 300px;
-  height: 300px;
-  flex-direction: column; /*egymás alatt*/
-  justify-content: center;
   background-color: #f6c453;
   border: 1px solid #183a1d;
   border-radius: 20px;
+}
+.jegyzet{
+  margin: 10px;
+  text-align: center;
+  justify-content: center;
 }
 
 /*Nav*/

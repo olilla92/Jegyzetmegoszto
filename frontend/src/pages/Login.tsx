@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import apiClient from '../api/apiClient.ts';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/LoginRegister.css';
+import {toast} from "react-toastify"
 
 import { Form, Button, Nav } from 'react-bootstrap';
 const Login = () => {
@@ -15,12 +16,11 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await apiClient.post('/users/login', { username, password });
-            const { token, user } = response.data;
+            const { token } = response.data;
             localStorage.setItem('token', token);
-            alert(`Welcome, ${user.username}`);
             navigate('/me');
         } catch (err: any) {
-            alert(err.response?.data?.message || 'Login failed!');
+            toast.error(err.response?.data?.message || 'Login failed!');
         }
     };
 

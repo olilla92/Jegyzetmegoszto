@@ -4,21 +4,20 @@ import type { Note } from '../types/Note.ts';
 import apiClient from '../api/apiClient';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Me.css';
-import { Nav, NavItem, Row, Col, Card } from 'react-bootstrap';
+import { Nav, NavItem, Row, Col, Card, Container } from 'react-bootstrap';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 
 const Me = () => {
     const [me, setMe] = useState<User>();
     const [myNotes, setMyNotes] = useState<Array<Note>>([]);
     const navigate = useNavigate();
-    useEffect(() => {});
+    
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login');
             return;
         }
-
         apiClient
             .get('/users/me', { headers: { Authorization: `Bearer ${token}` } })
             .then((res) => setMe(res.data))
@@ -54,31 +53,35 @@ const Me = () => {
 
                     <Sidebar className="sidebarNav">
                         <Menu className="sidebarMenu">
-                            <MenuItem>My Notes</MenuItem>
-                            <MenuItem>New Note</MenuItem>
+                            <MenuItem onClick={() => navigate('/me')}>My Notes</MenuItem>
+                            <MenuItem onClick={() => navigate('/new-note')}>New Note</MenuItem>
                             <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                         </Menu>
                     </Sidebar>
-
-                    <Row md={1} lg={3} className='container'>
-                        {myNotes
-                            .filter((n) => n.userId == me.id)
-                            .map((n) => (
-                                <Col>
-                                    <Card className="notecard">
-                                        <div className="adatok">
-                                            <Card.Title>
-                                                <h2 className="jegyzet">{n.title}</h2>
-                                            </Card.Title>
-                                            <Card.Body>
-                                                <p className="jegyzet">{n.content}</p>
-                                                <p className='jegyzet'>{n.isPublic}</p>
-                                            </Card.Body>
-                                        </div>
-                                    </Card>
-                                </Col>
-                            ))}
-                    </Row>
+                    <Container className="container">
+                        <Row md={1} lg={3}>
+                            {myNotes
+                                .filter((n) => n.userId == me.id)
+                                .map((n) => (
+                                    <Col md={3} lg={2} xl={1}>
+                                        <Card
+                                            className="notecard"
+                                            onClick={() => navigate('/edit-note/:id')}
+                                        >
+                                            <div className="adatok">
+                                                <Card.Title>
+                                                    <h2 className="jegyzet">{n.title}</h2>
+                                                </Card.Title>
+                                                <Card.Body>
+                                                    <p className="jegyzet">{n.content}</p>
+                                                    <p className="jegyzet">{n.isPublic}</p>
+                                                </Card.Body>
+                                            </div>
+                                        </Card>
+                                    </Col>
+                                ))}
+                        </Row>
+                    </Container>
                 </>
             ) : (
                 <h1>Nincs ilyen felhasználó!</h1>

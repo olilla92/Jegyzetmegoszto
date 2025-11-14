@@ -1,7 +1,7 @@
 export type Note = {
-  userId: number;
+  userId?: number;
   title: string;
   content: string;
-  isPublic: string;
+  isPublic: boolean;
   id?: number;
 };
