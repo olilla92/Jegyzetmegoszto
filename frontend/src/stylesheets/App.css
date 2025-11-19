@@ -1,33 +1,41 @@
 /*#root -> a mappa gyökere, az index.html fájl beállításai*/
-body{
-  background-color: #f8fff9;
+body {
+    background-color: #f8fff9;
 }
 /*Kártyák*/
-.cardContainer{
-  height: 100vh;
+.cardContainer {
+    height: 200px;
+    border-radius: 25px;
+    margin: 10px;
 }
-.cardsOfnotes{
-  display: flex;
-  justify-content: center;
+.cardsOfnotes {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+#cardContent {
+    overflow-y: auto;
 }
 /*Nav*/
-.nav{
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #183a1d;
-  width: 100%;
-  height: 70px;
-  top: 0;
-  left: 0;
-  position: fixed;
-  align-items: center;
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #183a1d;
+    width: 100%;
+    height: 70px;
+    top: 0;
+    left: 0;
+    position: fixed;
+    align-items: center;
 }
-.navitems{
-  margin-left: 20px;
+.navitems {
+    margin-left: 20px;
 }
-.linktext{
-  color:#f6c453
+.linktext {
+    color: #f6c453;
 }
-.linktext:hover{
-  color: #af8c3c;
+.linktext:hover,
+.linktext:active,
+.linktext:focus {
+    color: #af8c3c !important;
 }

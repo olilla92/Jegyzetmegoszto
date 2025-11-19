@@ -3,7 +3,7 @@ import type { Note } from './types/Note.ts';
 import apiClient from './api/apiClient.ts';
 import './stylesheets/App.css';
 import { useNavigate } from 'react-router-dom';
-import { Card, Row, Col, Nav, Container } from 'react-bootstrap';
+import { Nav, Container, Card, Row, Col } from 'react-bootstrap';
 
 function App() {
     const [notes, setNotes] = useState<Array<Note>>([]);
@@ -16,6 +16,17 @@ function App() {
             .then((response) => setNotes(response.data))
             .catch((result) => alert(result));
     }, []);
+
+    const generateCard = (n: Note) => {
+        return (
+            <Card className="cardContainer">
+                <Card.Body>
+                    <Card.Title className="cardsOfnotes">{n.title}</Card.Title>
+                    <Card.Text className="cardsOfnotes" id='cardContent'>{n.content}</Card.Text>
+                </Card.Body>
+            </Card>
+        );
+    };
 
     return (
         <>
@@ -37,35 +48,12 @@ function App() {
                 </Nav.Item>
             </Nav>
 
-            <Container className='CardContainer'>
-                <Row
-                    className="cardsOfnotes"
-                    align="center"
-                    justify="center"
-                    direction="row"
-                    debug
-                    xs={1}
-                    sm={1}
-                    md={2}
-                    lg={4}
-                    xl={5}
-                >
+            <Container className="ContainerofCards">
+                <Row xl={4} lg={3} md={2} sm={1} xs={1}>
                     {notes
-                        .filter((p) => String(p.isPublic) == 'true')
-                        .map((p) => (
-                            <Col>
-                                <Card className="notecard">
-                                    <div className="adatok">
-                                        <Card.Title>
-                                            <h2 className="jegyzet">{p.title}</h2>
-                                        </Card.Title>
-                                        <Card.Body>
-                                            <p className="jegyzet">{p.content}</p>
-                                            <p className="jegyzet">{p.isPublic}</p>
-                                        </Card.Body>
-                                    </div>
-                                </Card>
-                            </Col>
+                        .filter((n) => String(n.isPublic) == 'true')
+                        .map((n) => (
+                            <Col>{generateCard(n)}</Col>
                         ))}
                 </Row>
             </Container>

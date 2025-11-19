@@ -3,55 +3,59 @@ body {
     display: flex;
     justify-content: center;
 }
-.formLogin, .formReg {
+
+.formTitle {
+    text-align: center;
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.formLoginRegister {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     border-radius: 20px;
     background-color: #183a1d;
     color: #f8fff9;
     box-shadow: 5px 5px #0b1b0e;
-    box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
 }
-.formPoint {
+.formUsername,
+.formPassword {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 30px;
-    margin-top: 20px;
+    justify-content: center;
+}
+.Control:focus {
+    border-color: #f6c453 !important;
+    box-shadow: 0 0 0 0.1rem rgba(246, 196, 83, 0.4) !important;
+    outline: none !important;
+}
+.formLabel {
+    text-indent: 36px;
 }
 .formButtons {
     margin: auto;
     display: flex;
-    flex-direction: row;
 }
-.loginButtons, .regButton {
+.button,
+.backButton {
+    margin: 25px;
     width: 100px;
-    margin: 10px;
+    color: black;
+    background-color: #f6c453;
+    border: #f6c453;
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    background-color: #f8fff9;
-    color: #183a1d;
-    border: 1px solid #183a1d;
-    box-shadow: 5px 5px #0b1b0e;
-    box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+    align-items: center;
 }
-.loginButtons:hover, .regButton:hover{
-    color: #abadab;
-}
-.FormInput {
-    border-radius: 5px;
-    text-indent: 5px;
-    background-color: #f8fff9;
-    color: #183a1d;
-    box-shadow: 5px 5px #0b1b0e;
-    width: 200px;
-    height: 30px;
-}
-
-/*Register*/
-h1{
-    text-align: center;
-    font-size: 45px;
+.button:hover,
+.button:focus,
+.button:active,
+.backButton:hover,
+.backButton:focus,
+.backButton:active {
+    background-color: #967833 !important;
+    color: white;
 }

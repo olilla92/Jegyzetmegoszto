@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import apiClient from '../api/apiClient';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
-import { Nav } from 'react-bootstrap';
+import { Button, Form, Nav, Col, Row } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const [username, setUsername] = useState<string>('');
@@ -15,7 +15,7 @@ const Register = () => {
             const response = await apiClient.post('/users/register', { username, password });
             const { token, user } = response.data;
             localStorage.setItem('token', token);
-            alert(`Your account is done ${user.username}! Login and have fun :)`);
+            toast.success(`Your account is done ${user.username}! Login and have fun :)`);
             navigate('/me');
         } catch (err: any) {
             alert(err.response?.data?.message || 'Registration failed!');
@@ -42,33 +42,43 @@ const Register = () => {
                 </Nav.Item>
             </Nav>
 
-            <h1>Registration</h1>
-            <Form onSubmit={Registration} className="formReg">
-                <Form.Group className="formPoint" controlId="regUname">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        className="FormInput"
-                        type="text"
-                        value={username}
-                        placeholder="Enter username here"
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
+            <Form className="formLoginRegister" onSubmit={Registration}>
+                <Form.Label className="formTitle">Registration</Form.Label>
+                <Form.Group as={Row} className="formUsername">
+                    <Form.Label column className="formLabel">
+                        Username
+                    </Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            className="Control"
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </Col>
                 </Form.Group>
-                <Form.Group className="formPoint" controlId="regPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        className="FormInput"
-                        type="password"
-                        value={password}
-                        placeholder="Enter password here"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+
+                <Form.Group as={Row} className="formPassword">
+                    <Form.Label column className="formLabel">
+                        Password
+                    </Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            className="Control"
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Col>
                 </Form.Group>
+
                 <Form.Group className="formButtons">
-                    <Button className="regButton" type="submit">
+                    <Button className="button" type="submit">
                         Registration
                     </Button>
-                    <Button className="regButton" onClick={() => navigate('/')}>
+                    <Button className="backButton" onClick={() => navigate('/')}>
                         Back
                     </Button>
                 </Form.Group>

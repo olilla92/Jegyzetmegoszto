@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import apiClient from '../api/apiClient.ts';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/LoginRegister.css';
-import {toast} from "react-toastify"
-
-import { Form, Button, Nav } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import { Form, Button, Nav, Col, Row } from 'react-bootstrap';
 const Login = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -44,35 +43,43 @@ const Login = () => {
                 </Nav.Item>
             </Nav>
 
-            <h1>Login</h1>
-            <Form className="formLogin" onSubmit={handleLogin}>
-                <Form.Group className="formPoint" controlId="loginUname">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        className="FormInput"
-                        type="text"
-                        value={username}
-                        placeholder="Enter username here"
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
+            <Form className="formLoginRegister" onSubmit={handleLogin}>
+                <Form.Label className="formTitle">Login</Form.Label>
+                <Form.Group as={Row} className="formUsername">
+                    <Form.Label column className="formLabel">
+                        Username
+                    </Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            className="Control"
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </Col>
                 </Form.Group>
 
-                <Form.Group className="formPoint" controlId="loginPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        className="FormInput"
-                        type="password"
-                        value={password}
-                        placeholder="Enter password here"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                <Form.Group as={Row} className="formPassword">
+                    <Form.Label column className="formLabel">
+                        Password
+                    </Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            className="Control"
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Col>
                 </Form.Group>
 
                 <Form.Group className="formButtons">
-                    <Button className="loginButtons" type="submit">
+                    <Button className="button" type="submit">
                         Login
                     </Button>
-                    <Button className="loginButtons" onClick={() => navigate('/')}>
+                    <Button className="backButton" onClick={() => navigate('/')}>
                         Back
                     </Button>
                 </Form.Group>
