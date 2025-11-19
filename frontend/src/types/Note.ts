@@ -2,6 +2,6 @@ export type Note = {
   userId?: number;
   title: string;
   content: string;
-  isPublic: boolean;
+  isPublic: string;
   id?: number;
 };

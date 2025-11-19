@@ -18,8 +18,6 @@ body {
     border-radius: 20px;
     background-color: #183a1d;
     color: #f8fff9;
-    box-shadow: 5px 5px #0b1b0e;
-    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
 }
 .formUsername,
 .formPassword {
@@ -44,7 +42,7 @@ body {
     width: 100px;
     color: black;
     background-color: #f6c453;
-    border: #f6c453;
+    border-color: #f6c453;
     display: flex;
     flex-direction: row;
     justify-content: center;

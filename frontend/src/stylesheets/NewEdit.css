@@ -1,0 +1,48 @@
+.CreateNote{
+    background-color: #183a1d;
+    color: #f8fff9;
+    border-radius: 20px;
+    width: 400px;
+    height: 550px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+.createTitle{
+    text-indent: 17px;
+    margin-top: 20px;
+    font-size: 25px;
+}
+.isPublicTitle{
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.PublicOrNot{
+    display: flex;
+    justify-content: center;
+}
+.createButtons{
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin: 35px;
+}
+.crtBtn{
+    background-color: #f6c453 !important;
+    border-color: #f6c453 !important;
+    color: black;
+    width: 200px;
+    padding: 5px;
+}
+.crtBtn:hover{
+    background-color: #967833 !important;
+    border-color: #967833 !important;
+    color: white;
+}
+.inputBox{
+    width: 329.33px;
+    margin: auto;
+}

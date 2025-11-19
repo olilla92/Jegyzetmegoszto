@@ -12,9 +12,41 @@
 }
 .HeaderNav {
     height: 100px;
+    z-index: 100;
 }
 .HeaderNavItem {
     margin-left: 300px;
     color: white;
     font-size: 40px;
+}
+
+.MyNoteContainer{
+    margin-top: 120px;
+    margin-left: 300px;
+    display: flex;
+}
+.notecard{
+    height: 400px;
+    width: 300px;
+    margin: 10px;
+    border-radius: 25px;
+    display: flex;
+}
+.noteContain{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.notecontent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Icons{
+    z-index: 100;
+    display: flex;
+}
+.Delete{
+    margin-left: auto;
 }

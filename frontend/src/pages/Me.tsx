@@ -6,14 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Me.css';
 import { Nav, NavItem, Row, Col, Card, Container } from 'react-bootstrap';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
+import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 const Me = () => {
     const [me, setMe] = useState<User>();
     const [myNotes, setMyNotes] = useState<Array<Note>>([]);
     const navigate = useNavigate();
-    
+    const token = localStorage.getItem('token');
+
     useEffect(() => {
-        const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login');
             return;
@@ -28,18 +32,23 @@ const Me = () => {
             .catch((result) => alert(result));
     }, []);
 
-    if (!me)
-        return (
-            <>
-                <h1>Loading...</h1>
-            </>
-        );
-    if (!myNotes)
-        return (
-            <>
-                <p>Még nincsenek jegyzeteid!</p>
-            </>
-        );
+    const DeleteNote = (noteId?: number) => {
+        if (!noteId) {
+            toast.error('Nincs ilyen jegyzet.');
+            return;
+        }
+        apiClient
+            .delete(`/notes/${noteId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then(() => {
+                toast.success('A jegyzet sikeresen törlődött.');
+                setMyNotes(myNotes.filter((n) => n.id !== noteId));
+            })
+            .catch(() => toast.error('Nem sikerült törölni a jegyzetet.'));
+    };
 
     return (
         <>
@@ -58,28 +67,46 @@ const Me = () => {
                             <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                         </Menu>
                     </Sidebar>
-                    <Container className="container">
+
+                    <Container className="MyNoteContainer">
                         <Row>
-                            {myNotes
-                                .filter((n) => n.userId == me.id)
-                                .map((n) => (
-                                    <Col>
-                                        <Card
-                                            className="notecard"
-                                            onClick={() => navigate('/edit-note/:id')}
-                                        >
-                                            <div className="adatok">
-                                                <Card.Title>
-                                                    <h2 className="jegyzet">{n.title}</h2>
-                                                </Card.Title>
-                                                <Card.Body>
-                                                    <p className="jegyzet">{n.content}</p>
-                                                    <p className="jegyzet">{n.isPublic}</p>
-                                                </Card.Body>
-                                            </div>
-                                        </Card>
-                                    </Col>
-                                ))}
+                            {myNotes && myNotes.filter((n) => n.userId == me.id).length > 0 ? (
+                                myNotes
+                                    .filter((n) => n.userId == me.id)
+                                    .map((n) => (
+                                        <Col key={n.id}>
+                                            <Card className="notecard">
+                                                <Card.Header className="Icons">
+                                                    <FontAwesomeIcon
+                                                        className="Pencil"
+                                                        icon={faPencil}
+                                                        onClick={() =>
+                                                            navigate(`/new-edit/${n.id}`)
+                                                        }
+                                                    />
+                                                    <FontAwesomeIcon
+                                                        className="Delete"
+                                                        icon={faDeleteLeft}
+                                                        onClick={() => DeleteNote(n.id)}
+                                                    />
+                                                </Card.Header>
+                                                <div className="noteContain">
+                                                    <Card.Title>
+                                                        <h2 className="noteconent">{n.title}</h2>
+                                                    </Card.Title>
+                                                    <Card.Body>
+                                                        <p className="noteconent">{n.content}</p>
+                                                        <p className="noteconent">{n.isPublic}</p>
+                                                    </Card.Body>
+                                                </div>
+                                            </Card>
+                                        </Col>
+                                    ))
+                            ) : (
+                                <div className="ifYouHaveNoNotes">
+                                    <h2>Még nincsenek jegyzeteid!</h2>
+                                </div>
+                            )}
                         </Row>
                     </Container>
                 </>
