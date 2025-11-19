@@ -4,7 +4,8 @@ body {
 }
 /*Kártyák*/
 .cardContainer {
-    height: 200px;
+    height: 300px;
+    height: 400px;
     border-radius: 25px;
     margin: 10px;
 }
