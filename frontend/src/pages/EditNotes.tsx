@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, Container, Button, Nav, NavItem, Col, Row } from 'react-bootstrap';
+import { Form, Container, Button, Nav, NavItem, Col, Row, CloseButton } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { Note } from '../types/Note.ts';
 import apiClient from '../api/apiClient';
@@ -24,7 +24,7 @@ const EditNote = () => {
                 setContent(response.data.content ?? '');
                 setIsPublic(response.data.isPublic === true || response.data.isPublic === 'true');
             })
-            .catch((result) => toast.error(result));
+            .catch(() => toast.error("Az adatokat nem sikerült betölteni."));
     }, [id]);
 
     const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,18 +49,28 @@ const EditNote = () => {
     return (
         <>
             <Nav className="HeaderNav">
-                <NavItem className="HeaderNavItem">Edit note</NavItem>
+                <NavItem className='title'>
+                    Note editing
+                </NavItem>
             </Nav>
 
             <Sidebar className="sidebarNav">
                 <Menu className="sidebarMenu">
                     <MenuItem onClick={() => navigate('/me')}>My Notes</MenuItem>
                     <MenuItem onClick={() => navigate('/new-note')}>New Note</MenuItem>
+                    <MenuItem onClick={() => navigate('/settings')}>Settings</MenuItem>
                     <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                 </Menu>
             </Sidebar>
             <Container className="CreateNote">
                 <Form onSubmit={handleEdit}>
+                    <Form.Group className="Closing">
+                        <CloseButton
+                            variant="white"
+                            className="CloseButton"
+                            onClick={() => navigate('/me')}
+                        />
+                    </Form.Group>
                     <Form.Group>
                         <Form.Label className="createTitle">Title</Form.Label>
                         <Form.Control
@@ -113,9 +123,6 @@ const EditNote = () => {
                     <Form.Group className="createButtons">
                         <Button className="crtBtn" type="submit">
                             Update
-                        </Button>
-                        <Button className="crtBtn" onClick={() => navigate('/me')}>
-                            Back
                         </Button>
                     </Form.Group>
                 </Form>

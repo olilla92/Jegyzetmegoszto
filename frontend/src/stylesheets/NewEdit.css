@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: center;
     padding: 25px;
+    position: relative;
 }
 .createTitle{
     text-indent: 17px;
@@ -34,7 +35,7 @@
     background-color: #f6c453 !important;
     border-color: #f6c453 !important;
     color: black;
-    width: 100px;
+    width: 200px;
     padding: 5px;
 }
 .crtBtn:hover{
@@ -45,4 +46,29 @@
 .inputBox{
     width: 329.33px;
     margin: auto;
+}
+.Closing{
+    display: flex;
+    justify-content: flex-end;
+    top: 0;
+}
+.CloseButton{
+   color: #f8fff9;
+   position: absolute;
+   display: none;
+}
+.title{
+    color: #f6c453;
+    width: 100%;
+    font-size: 40px;
+    margin-left: 300px;
+}
+@media screen and (max-width: 1844px){
+    .title{
+        text-align: center;
+        margin: 0;
+    }
+    .CloseButton{
+        display: block;
+    }
 }

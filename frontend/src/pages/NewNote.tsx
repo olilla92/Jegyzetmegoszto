@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Form, Button, Nav, NavItem, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, Nav, NavItem, Row, Col, CloseButton } from 'react-bootstrap';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { useNavigate } from 'react-router-dom';
 import type { Note } from '../types/Note.ts';
@@ -35,19 +35,27 @@ const NewNote = () => {
     return (
         <>
             <Nav className="HeaderNav">
-                <NavItem className="HeaderNavItem">Create note</NavItem>
+                <NavItem className="title">Note writing</NavItem>
             </Nav>
 
             <Sidebar className="sidebarNav">
                 <Menu className="sidebarMenu">
                     <MenuItem onClick={() => navigate('/me')}>My Notes</MenuItem>
                     <MenuItem onClick={() => navigate('/new-note')}>New Note</MenuItem>
+                    <MenuItem onClick={() => navigate('/settings')}>Settings</MenuItem>
                     <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                 </Menu>
             </Sidebar>
 
             <Container className="CreateNote">
                 <Form onSubmit={handleSave}>
+                    <Form.Group className="Closing">
+                        <CloseButton
+                            variant="white"
+                            className="CloseButton"
+                            onClick={() => navigate('/me')}
+                        />
+                    </Form.Group>
                     <Form.Group>
                         <Form.Label className="createTitle">Title</Form.Label>
                         <Form.Control

@@ -1,29 +1,57 @@
 .sidebarNav {
     position: fixed !important;
+    margin: 0;
+    padding: 0;
     left: 0;
     top: 0;
-    height: 100vh;
+    height: 100%;
     width: 250px;
-    z-index: 1000;
     background-color: #183a1d;
+}
+@media screen and (max-width: 1884px) {
+    .sidebarNav{
+        display: none;
+    }
+    .HeaderNavItem{
+        display: none;
+    }
+    .SmallScreenMenu{
+        display: block;
+    }
+}
+@media screen and (min-width: 1884px) {
+    .HeaderNavItem{
+        display: block;
+    }
+    .SmallScreenMenu{
+        display: none;
+    }
+}
+.SmallScreenMenu{
+    color: #f6c453;
+    margin-left: 30px;
+}
+.SmallScreenMenu:hover{
+    cursor: pointer;
 }
 .sidebarMenu {
     margin-top: 100px;
+    padding: 16px;
+    text-decoration: none;
 }
 .HeaderNav {
     height: 100px;
     z-index: 100;
 }
-.HeaderNavItem {
+.HeaderNavItem{
     margin-left: 300px;
-    color: white;
+    color: #f6c453;
     font-size: 40px;
 }
-
 .MyNoteContainer{
     margin-top: 120px;
-    margin-left: 300px;
     display: flex;
+    justify-content: center;
 }
 .notecard{
     height: 400px;

@@ -9,20 +9,22 @@ import Register from "./pages/Register.tsx"
 import Me from "./pages/Me.tsx"
 import NewNote from './pages/NewNote.tsx'
 import EditNote from './pages/EditNotes.tsx';
+import UserSettings from './pages/UserSettings.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<App/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/me' element={<Me/>}/>
-        <Route path='/new-note' element={<NewNote/>}/>
-        <Route path='/edit-note/:id' element={<EditNote/>}/>
-      </Routes>
-    </BrowserRouter>
+    <StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/me" element={<Me />} />
+                <Route path="/new-note" element={<NewNote />} />
+                <Route path="/edit-note/:id" element={<EditNote />} />
+                <Route path="/settings" element={<UserSettings />} />
+            </Routes>
+        </BrowserRouter>
 
-    <ToastContainer theme='colored' closeOnClick limit={1} />
-  </StrictMode>,
-)
+        <ToastContainer theme="colored" closeOnClick limit={1} />
+    </StrictMode>,
+);

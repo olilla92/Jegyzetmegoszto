@@ -4,7 +4,7 @@ import type { Note } from '../types/Note.ts';
 import apiClient from '../api/apiClient';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Me.css';
-import { Nav, NavItem, Row, Col, Card, Container } from 'react-bootstrap';
+import { Nav, NavItem, Row, Col, Card, Container, CloseButton } from 'react-bootstrap';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -58,12 +58,36 @@ const Me = () => {
                         <NavItem className="HeaderNavItem">
                             <div>Welcome {me?.username}!</div>
                         </NavItem>
+                        <NavItem className="SmallScreenMenu" onClick={() => navigate('/me')}>
+                            My notes
+                        </NavItem>
+                        <NavItem className="SmallScreenMenu" onClick={() => navigate('/new-note')}>
+                            New note
+                        </NavItem>
+                        <NavItem className="SmallScreenMenu" onClick={() => navigate('/settings')}>
+                            Settings
+                        </NavItem>
+                        <NavItem
+                            id="settings"
+                            className="SmallScreenMenu"
+                            onClick={() => navigate('/settings')}
+                        >
+                            Settings
+                        </NavItem>
+                        <NavItem
+                            id="logout"
+                            className="SmallScreenMenu"
+                            onClick={() => navigate('/')}
+                        >
+                            Logout
+                        </NavItem>
                     </Nav>
 
                     <Sidebar className="sidebarNav">
                         <Menu className="sidebarMenu">
                             <MenuItem onClick={() => navigate('/me')}>My Notes</MenuItem>
                             <MenuItem onClick={() => navigate('/new-note')}>New Note</MenuItem>
+                            <MenuItem onClick={() => navigate('/settings')}>Settings</MenuItem>
                             <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                         </Menu>
                     </Sidebar>
