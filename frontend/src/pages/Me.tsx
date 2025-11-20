@@ -81,7 +81,7 @@ const Me = () => {
                                                         className="Pencil"
                                                         icon={faPencil}
                                                         onClick={() =>
-                                                            navigate(`/new-edit/${n.id}`)
+                                                            navigate(`/edit-note/${n.id}`)
                                                         }
                                                     />
                                                     <FontAwesomeIcon

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, Container, Button, Nav, NavItem } from 'react-bootstrap';
+import { Form, Container, Button, Nav, NavItem, Col, Row } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { Note } from '../types/Note.ts';
 import apiClient from '../api/apiClient';
@@ -11,8 +11,10 @@ const EditNote = () => {
     const [title, setTitle] = useState<string>('');
     const [content, setContent] = useState<string>('');
     const [isPublic, setIsPublic] = useState<boolean>(false);
-    const { id } = useParams();
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         apiClient
@@ -20,22 +22,27 @@ const EditNote = () => {
             .then((response) => {
                 setTitle(response.data.title ?? '');
                 setContent(response.data.content ?? '');
-                setIsPublic(response.data.isPublic ?? '');
+                setIsPublic(response.data.isPublic === true || response.data.isPublic === 'true');
             })
-            .catch((result) => alert(result));
-    });
+            .catch((result) => toast.error(result));
+    }, [id]);
 
-    const handleEdit = async (f: React.FormEvent) => {
-        f.preventDefault();
-        const e: Note = {
+    const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const n: Note = {
             title,
             content,
-            isPublic,
+            isPublic: isPublic ? 'true' : 'false',
         };
+
         apiClient
-            .put(`/notes/${Number(id)}`, e)
-            .then(() => toast.success("Sikeres módosítás!"))
-            .catch(() => toast.error("Sikertelen módosítás!"));
+            .put(`/notes/${Number(id)}`, n, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then(() => toast.success('Sikeres módosítás!'))
+            .catch(() => toast.error('Sikertelen módosítás!'));
         navigate('/me');
     };
 
@@ -52,11 +59,12 @@ const EditNote = () => {
                     <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                 </Menu>
             </Sidebar>
-            <Container>
+            <Container className="CreateNote">
                 <Form onSubmit={handleEdit}>
                     <Form.Group>
-                        <Form.Label>Cím</Form.Label>
+                        <Form.Label className="createTitle">Title</Form.Label>
                         <Form.Control
+                            className="inputBox"
                             type="text"
                             value={title}
                             placeholder="Enter title here"
@@ -64,26 +72,51 @@ const EditNote = () => {
                         />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Content</Form.Label>
+                        <Form.Label className="createTitle">Content</Form.Label>
                         <Form.Control
+                            className="inputBox"
                             type="textarea"
                             value={content}
                             placeholder="Enter content here"
                             onChange={(e) => setContent(e.target.value)}
                         />
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Megosztja-e a jegyzetét?</Form.Label>
-                        <Form.Control
-                            type="radio"
-                            value={String(isPublic)}
-                            onChange={(e) => setIsPublic(Boolean(e.target.value))}
-                        />
-                    </Form.Group>
 
-                    <Form.Group>
-                        <Button type="submit">Update</Button>
-                        <Button onClick={() => navigate('/me')}>Back</Button>
+                    <fieldset>
+                        <Form.Label as="legend" column className="isPublicTitle">
+                            Do you want to share your note?
+                        </Form.Label>
+                        <Form.Group as={Row} className="PublicOrNot">
+                            <Col sm={10}>
+                                <Form.Check
+                                    className="Control"
+                                    type="radio"
+                                    label="I share my note."
+                                    name="sharing"
+                                    value="true"
+                                    checked={isPublic === true}
+                                    onChange={() => setIsPublic(true)}
+                                />
+                                <Form.Check
+                                    className="Control"
+                                    type="radio"
+                                    label="I keep it private."
+                                    name="sharing"
+                                    value="false"
+                                    checked={isPublic === false}
+                                    onChange={() => setIsPublic(false)}
+                                />
+                            </Col>
+                        </Form.Group>
+                    </fieldset>
+
+                    <Form.Group className="createButtons">
+                        <Button className="crtBtn" type="submit">
+                            Update
+                        </Button>
+                        <Button className="crtBtn" onClick={() => navigate('/me')}>
+                            Back
+                        </Button>
                     </Form.Group>
                 </Form>
             </Container>

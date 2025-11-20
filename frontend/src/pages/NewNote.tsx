@@ -20,7 +20,7 @@ const NewNote = () => {
         const n: Note = {
             title,
             content,
-            isPublic: isPublic ? "true" : "false",
+            isPublic: isPublic ? 'true' : 'false',
         };
         apiClient
             .post('/notes', n, {
@@ -81,7 +81,7 @@ const NewNote = () => {
                                     type="radio"
                                     label="I share my note."
                                     name="sharing"
-                                    value="true"
+                                    value={String(isPublic)}
                                     onChange={(e) => setIsPublic(e.target.value === 'true')}
                                 />
                                 <Form.Check
@@ -89,7 +89,7 @@ const NewNote = () => {
                                     type="radio"
                                     label="I keep it private."
                                     name="sharing"
-                                    value="false"
+                                    value={String(isPublic)}
                                     onChange={(e) => setIsPublic(e.target.value === 'true')}
                                 />
                             </Col>
@@ -97,7 +97,7 @@ const NewNote = () => {
                     </fieldset>
 
                     <Form.Group className="createButtons">
-                        <Button className="crtBtn" type="submit">
+                        <Button className="crtBtn" onClick={() => navigate('/me')} type="submit">
                             Create
                         </Button>
                     </Form.Group>
