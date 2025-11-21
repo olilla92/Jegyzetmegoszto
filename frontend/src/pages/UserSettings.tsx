@@ -17,9 +17,14 @@ const UserSettings = () => {
 
     useEffect(() => {
         apiClient
-            .get(`/users/${Number(id)}`)
+            .get(`/users/${Number(id)}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then((response) => {
                 setUsername(response.data.username ?? '');
+                setPassword('');
             })
             .catch(() => toast.error('Az adatokat nem sikerült betölteni.'));
     }, [id]);
@@ -37,9 +42,11 @@ const UserSettings = () => {
                     Authorization: `Bearer ${token}`,
                 },
             })
-            .then(() => toast.success('Sikeres módosítás!'))
+            .then(() => {
+                toast.success('Sikeres módosítás!');
+                navigate('/me');
+            })
             .catch(() => toast.error('Sikertelen módosítás!'));
-        navigate('/me');
     };
     return (
         <>
@@ -50,7 +57,9 @@ const UserSettings = () => {
                 <Menu className="sidebarMenu">
                     <MenuItem onClick={() => navigate('/me')}>My Notes</MenuItem>
                     <MenuItem onClick={() => navigate('/new-note')}>New Note</MenuItem>
-                    <MenuItem onClick={() => navigate('/settings')}>Settings</MenuItem>
+                    <MenuItem onClick={() => navigate(`/settings/${Number(id)}`)}>
+                        Settings
+                    </MenuItem>
                     <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                 </Menu>
             </Sidebar>

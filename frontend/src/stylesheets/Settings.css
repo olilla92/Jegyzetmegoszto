@@ -1,7 +1,51 @@
-.UserData{}
-.Closing{}
-.CloseButton{}
-.UserName{}
-.PasswordText{}
-.inputBox{}
-.SaveButtons{}
+.UserData {
+    background-color: #183a1d;
+    color: #f8fff9;
+    border-radius: 20px;
+    width: 400px;
+    height: 550px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    position: relative;
+}
+.Closing {
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+}
+.CloseButton {
+    color: #f8fff9;
+    position: absolute;
+    display: none;
+}
+.UserName {
+    text-indent: 17px;
+    margin-top: 20px;
+    font-size: 25px;
+}
+.PasswordText {
+    text-indent: 17px;
+    margin-top: 20px;
+    font-size: 25px;
+}
+.inputBox {
+    width: 329.33px;
+    margin: auto;
+}
+.SaveButtons {
+    display: flex;
+    justify-content: center;
+    margin: 35px;
+}
+@media screen and (max-width: 1844px){
+    .title{
+        text-align: center;
+        margin: 0;
+    }
+    .CloseButton{
+        display: block;
+    }
+}

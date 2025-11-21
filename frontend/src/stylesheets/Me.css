@@ -50,9 +50,9 @@
 }
 
 .notecard{
-    width: 300px;
-    height: 400px;
-    margin: 10px;
+    height: 100%;
+    width: 100%;
+    margin: auto;
     border-radius: 25px;
 } 
 .noteContain{
@@ -73,13 +73,31 @@
 .Delete{
     margin-left: auto;
 }
+
 @media screen and (max-width: 992px) {
     .MyNoteContainer{
         margin-top: 120px;
+        
+    }
+    .MyNoteRow{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
 @media screen and (max-width: 768px) {
     .notecard{
         width: 500px;
     }
+}
+@media screen and (min-width: 992px) {
+    
+}
+.deleteConfirm, .deleteConfirm:focus, .deleteConfirm:active{
+    background-color:#f6c453 !important;
+    border-color: #f6c453 !important;
+}
+.deleteConfirm:hover{
+    background-color: #967833 !important;
+    border-color: #967833 !important;
 }

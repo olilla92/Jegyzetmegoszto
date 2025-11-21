@@ -21,7 +21,7 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="/me" element={<Me />} />
                 <Route path="/new-note" element={<NewNote />} />
                 <Route path="/edit-note/:id" element={<EditNote />} />
-                <Route path="/settings" element={<UserSettings />} />
+                <Route path="/settings/:id" element={<UserSettings />} />
             </Routes>
         </BrowserRouter>
 

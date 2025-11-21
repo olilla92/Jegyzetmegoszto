@@ -11,6 +11,7 @@ const EditNote = () => {
     const [title, setTitle] = useState<string>('');
     const [content, setContent] = useState<string>('');
     const [isPublic, setIsPublic] = useState<boolean>(false);
+
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -24,7 +25,7 @@ const EditNote = () => {
                 setContent(response.data.content ?? '');
                 setIsPublic(response.data.isPublic === true || response.data.isPublic === 'true');
             })
-            .catch(() => toast.error("Az adatokat nem sikerült betölteni."));
+            .catch(() => toast.error('Az adatokat nem sikerült betölteni.'));
     }, [id]);
 
     const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,16 +50,16 @@ const EditNote = () => {
     return (
         <>
             <Nav className="HeaderNav">
-                <NavItem className='title'>
-                    Note editing
-                </NavItem>
+                <NavItem className="title">Note editing</NavItem>
             </Nav>
 
             <Sidebar className="sidebarNav">
                 <Menu className="sidebarMenu">
                     <MenuItem onClick={() => navigate('/me')}>My Notes</MenuItem>
                     <MenuItem onClick={() => navigate('/new-note')}>New Note</MenuItem>
-                    <MenuItem onClick={() => navigate('/settings')}>Settings</MenuItem>
+                    <MenuItem onClick={() => navigate(`/settings/${Number(id)}`)}>
+                        Settings
+                    </MenuItem>
                     <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                 </Menu>
             </Sidebar>
@@ -85,7 +86,8 @@ const EditNote = () => {
                         <Form.Label className="createTitle">Content</Form.Label>
                         <Form.Control
                             className="inputBox"
-                            type="textarea"
+                            as="textarea"
+                            type="text"
                             value={content}
                             placeholder="Enter content here"
                             onChange={(e) => setContent(e.target.value)}

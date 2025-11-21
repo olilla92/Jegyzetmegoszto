@@ -17,6 +17,12 @@ router.get('/me', auth, (req, res) => {
     res.json({ id: user.id, username: user.username });
 });
 
+router.get('/:id', auth, (req, res) => {
+    const user = Users.getUserById(+req.userId);
+    if (!user) return res.status(404).json({ message: 'User not found!' });
+    res.json({ id: user.id, username: user.username, password: user.password });
+});
+
 router.post('/register', (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) return res.status(400).json({ message: 'Missing some data!' });

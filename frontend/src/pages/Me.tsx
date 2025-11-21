@@ -4,7 +4,7 @@ import type { Note } from '../types/Note.ts';
 import apiClient from '../api/apiClient';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Me.css';
-import { Nav, NavItem, Row, Col, Card, Container, CloseButton } from 'react-bootstrap';
+import { Nav, NavItem, Row, Col, Card, Container } from 'react-bootstrap';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +15,7 @@ const Me = () => {
     const [me, setMe] = useState<User>();
     const [myNotes, setMyNotes] = useState<Array<Note>>([]);
     const navigate = useNavigate();
+
     const token = localStorage.getItem('token');
 
     useEffect(() => {
@@ -27,7 +28,11 @@ const Me = () => {
             .then((res) => setMe(res.data))
             .catch(() => navigate('/login'));
         apiClient
-            .get('/notes')
+            .get('/notes', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then((response) => setMyNotes(response.data))
             .catch((result) => alert(result));
     }, []);
@@ -64,13 +69,9 @@ const Me = () => {
                         <NavItem className="SmallScreenMenu" onClick={() => navigate('/new-note')}>
                             New note
                         </NavItem>
-                        <NavItem className="SmallScreenMenu" onClick={() => navigate('/settings')}>
-                            Settings
-                        </NavItem>
                         <NavItem
-                            id="settings"
                             className="SmallScreenMenu"
-                            onClick={() => navigate('/settings')}
+                            onClick={() => navigate(`/settings/${Number(me?.id)}`)}
                         >
                             Settings
                         </NavItem>
@@ -87,18 +88,28 @@ const Me = () => {
                         <Menu className="sidebarMenu">
                             <MenuItem onClick={() => navigate('/me')}>My Notes</MenuItem>
                             <MenuItem onClick={() => navigate('/new-note')}>New Note</MenuItem>
-                            <MenuItem onClick={() => navigate('/settings')}>Settings</MenuItem>
+                            <MenuItem onClick={() => navigate(`/settings/${Number(me?.id)}`)}>
+                                Settings
+                            </MenuItem>
                             <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                         </Menu>
                     </Sidebar>
 
                     <Container className="MyNoteContainer">
-                        <Row className='MyNoteRow' xs={1} sm={1} md={2} lg={3} xl={3} xxl={4}>
+                        <Row className="MyNoteRow g-3" xs={12} sm={12} md={6} lg={4} xl={4} xxl={3}>
                             {myNotes && myNotes.filter((n) => n.userId == me.id).length > 0 ? (
                                 myNotes
                                     .filter((n) => n.userId == me.id)
                                     .map((n) => (
-                                        <Col key={n.id}>
+                                        <Col
+                                            key={n.id}
+                                            xs={12}
+                                            sm={12}
+                                            md={6}
+                                            lg={4}
+                                            xl={4}
+                                            xxl={3}
+                                        >
                                             <Card className="notecard">
                                                 <Card.Header className="Icons">
                                                     <FontAwesomeIcon

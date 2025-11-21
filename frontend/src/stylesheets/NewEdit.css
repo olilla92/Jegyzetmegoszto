@@ -63,11 +63,7 @@
     font-size: 40px;
     margin-left: 300px;
 }
-@media screen and (max-width: 1844px){
-    .title{
-        text-align: center;
-        margin: 0;
-    }
+@media screen and (max-width: 1884px){
     .CloseButton{
         display: block;
     }
